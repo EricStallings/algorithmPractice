@@ -11,61 +11,14 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 */
 
-// create a modifier variable to keep track of recursive calls. 
-// shift the first element out of the array 
-// loop over the remaining elements in the array and add them to the first element 
-// if they add up to target, then return their positions in the original array using modifier 
-
-
-// const twoSum = (array, target) => {
-//   let modifier = 0;
-//   let resultArray = [0, 0];
-
-//   const helperFunc = (baseElement, array2, target2) => {
-//     for (let i = 0; i < array2.length; i++){
-//       if (baseElement + array2[i] === target2) {
-//         console.log(`Got one!`)
-//         resultArray[0] = modifier;
-//         resultArray[1] = i+modifier;
-//       } else {
-//         modifier ++;
-//         console.log(`modifier is :`, modifier)
-//         baseElement = array2.shift();
-//         // console.log(`Line 31, baseElement is ${baseElement}, array is ${array2}`)
-//         helperFunc(baseElement, array2, target2)
-//       }
-//     }
-//   }
-
-//   helperFunc(array[0], array, target)
-
-//   return resultArray;
-// }
-
-
-// const twoSum = function(nums, target) {
-
-
-//   // iterate over the input array
-//   // iterate over the input array in a nested loop 
-//   // if two elements together add up to the target, return an array with index 0 being the index of the first el, and index 1 being the index of the second el. 
-
-//   for (let i = 0; i < nums.length; i++ ){
-//     for (let j = 1; j < nums.length; j++){
-//       if (nums[i] === nums[j]) continue;
-//       if (nums[i] + nums[j] === target){
-//         return [i,j]
-//       }
-//     }
-//   }
-// };
 
 
 // twoSum with a While Loop
 
 const twoSum = (array, target) => {
   let i = 0;
-  let j = i+1;
+  let j = i + 1;
+
   while (j < array.length){
     if (array[i] + array[j] === target){
       return [i , j]
@@ -80,6 +33,41 @@ const twoSum = (array, target) => {
   }
 }
 
-console.log(twoSum([2, 7, 11, 15], 9)) // => [0,1]
-console.log(twoSum([3,3], 6)) // => [0,1]
-console.log(twoSum([2, 5, 5, 1], 10)) // => [1,2]
+
+const twoSum2 = function(nums, target) {
+
+  const trackerObj = {};
+
+  for(let i=0; i<nums.length; i++){
+    console.log(`Tracker Object: `, trackerObj)
+    // console.log(`nums[${i}]: `, nums[i])
+      if(trackerObj[nums[i]]>=0){
+        console.log(`${trackerObj[nums[i]]} is greater than or equal to 0`)
+          return [ trackerObj[nums[i] ] , i]
+      }
+      // console.log(`tracker object at ${target-nums[i]} = ${i}`)
+      trackerObj[target-nums[i]] = i
+      console.log(`----------------`)
+  }
+};
+
+// console.log(twoSum([2, 7, 11, 15], 9)) // => [0,1]
+// console.log(twoSum([3,3], 6)) // => [0,1]
+console.log(twoSum2([2, 1, 13, 7, 20, 54, 9, 98], 100)) // => [1,2]
+
+/*
+Here's the breakdown! 
+  1. Create a tracker object. This object will have key/value pairs in this format: 
+      <'THE DIFFERENCE BETWEEN THE TARGET AND CURRENT ELEMENT'> : <The index of the current element>
+  Example: Target = 100, array[0] = 2. 
+  trackerObj['98'] = 0. 
+
+  2. First IF (base case) statement: 
+    If trackerObj[nums[i]] > = 0, return final array: [ trackerObj[nums[i]] , i].
+    The reason: If trackerObj[nums[i]] exists, that means that trackerObj[nums[i]]'s counterpart, exists. 
+
+  3. in all cases, trackerObj[target-nums[i]] = i. 
+
+  For the example array [2, 5, 5, 1, 13, 98] and target 100
+  trackerObj is { '87': 4 (100 - 13 : index of 13), '95': 2 (100-5 : index of 5), '98': 0 (100-2), '99': 3 }
+*/
