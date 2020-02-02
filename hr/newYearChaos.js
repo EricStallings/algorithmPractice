@@ -19,15 +19,17 @@ function minimumBribes(array) {
 
   }
   console.log(`Drumroll please . . . `)
-  return counter;
+  return console.log(counter, `----------------`)
 }
 
-// const testCase = [2,1,5,3,4] 
-// const testCase2 = [2, 5, 1, 3, 4];
-// const testCase3 = [5, 1, 2, 3, 7, 8, 6, 4]
+// 
+
+const testCase = [2,1,5,3,4] 
+const testCase2 = [2, 5, 1, 3, 4];
+const testCase3 = [5, 1, 2, 3, 7, 8, 6, 4]
 const testCase4 = [1, 2, 5, 3, 7, 8, 6, 4]
 
-// console.log(minimumBribes(testCase)) //=> 3 moves: 2 bribed 1 once, and 5 bribed both 4 and 3
-// console.log(minimumBribes(testCase2)) // too chaotic
-// console.log(minimumBribes(testCase3)) // => too chaotic 
+console.log(minimumBribes(testCase)) //=> 3 moves: 2 bribed 1 once, and 5 bribed both 4 and 3
+console.log(minimumBribes(testCase2)) // too chaotic
+console.log(minimumBribes(testCase3)) // => too chaotic 
 console.log(minimumBribes(testCase4)) //=> 7
