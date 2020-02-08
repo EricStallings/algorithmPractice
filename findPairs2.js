@@ -28,15 +28,16 @@ function findPairs(array){
       if (currentStudent == compareStudent){
         continue;
       } else if (currentClass == compareClass){
+        
         tempKey.push(currentStudent, compareStudent)
         tempVal.push(currentClass);
-
-        resultObj[tempKey] = tempVal;
-
+				if (resultObj[tempKey]) resultObj[tempKey].push(currentClass)
+        else {
+        resultObj[tempKey.sort((a,b)=> a-b)] = tempVal;
+        }
         tempKey = [];
         tempVal = [];
       }
-
     }
   }
 
